@@ -74,6 +74,7 @@ nav ul li a::after {
   transition: 0.3s ease;
 }
 
-nav ul li a:hover::after {
+nav ul li a:hover::after,
+nav ul li a.active::after {
   width: 100%;
 }
