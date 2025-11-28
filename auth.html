@@ -9,10 +9,12 @@
     <title>Alexein</title>
 </head>
 <body>
-    <div class="container">
-        <div class="form-box login">
+
+    <!-- login -->
+    <div id="login" class="container">
+        <div class="login form-box" id="authLogin">
             <form action="">
-                <h1>Login</h1>
+                <h1>Sign In to your Account</h1>
                 <div class="input-box">
                     <input type="text" placeholder="Username" required>
                     <i class="bi bi-person-fill"></i>
@@ -22,8 +24,41 @@
                     <i class="bi bi-lock-fill"></i>
                 </div>
                 <button type="submit" class="btn">Login</button>
+                <p class="auth-link">Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a></p>
             </form>
         </div>
+        <div class="login welcome-page">
+            <h1>Welcome to <span>Alexein</span></h1>
+            <p>Your Digital Gateway to Knowledge</p>
+            <p>Are you new here?</p>
+            <button class="btn" onclick="showSignup()">Sign Up</button>
+        </div>
     </div>
+    
+    <!-- sign up -->
+    <div id="signup" class="container hidden">
+        <div class="signup form-box" id="authSignup">
+            <form action="">
+                <h1>Register an Account</h1>
+                <div class="input-box">
+                    <input type="text" placeholder="Username" required>
+                    <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" required>
+                    <i class="bi bi-lock-fill"></i>
+                </div>
+                <button type="submit" class="btn signup">Register</button>
+                <p class="auth-link">Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+            </form>
+        </div>
+        <div class="signup welcome-page">
+            <h1>Welcome to <span>Alexein</span></h1>
+            <p>Your Digital Gateway to Knowledge</p>
+            <p>Are you new here?</p>
+            <button class="btn" onclick="showLogin()">Sign Up</button>
+        </div>
+    </div>
+    <script src="auth.js"></script>
 </body>
 </html>
