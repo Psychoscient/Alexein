@@ -24,6 +24,7 @@ nav {
     background-color: #571B11;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 0 0 1.5rem 1.5rem;
+    z-index: 99;
 }
  
 .nav-logo {
@@ -81,88 +82,150 @@ nav ul li a.active::after {
   width: 100%;
 }
  
-/* ABOUT SECTION */
-.about-section {
-    text-align: center;
-    padding: 4rem 2rem;
-    background: #F5F5F5;
+.library {
+    padding: 4rem;
 }
- 
-.about-section h1 {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-    color: #5A1F14;
-}
- 
-.about-section p {
-    max-width: 900px;
-    margin: 0 auto;
-    line-height: 1.7;
-    font-size: 1.1rem;
-    color: #4B4B4B;
-}
- 
-/* MEMBERS SECTION */
-.members-section {
-    background: #571B11;
-    text-align: center;
-    padding: 4rem 2rem;
-}
- 
-.members-section h1 {
-    color: #FFFFFF;
-    font-size: 2.7rem;
-    margin-bottom: 3rem;
-    font-weight: 700;
-}
- 
-.members-container {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-}
- 
-.member-card {
-    background: #FFFFFF;
-    border-radius: 1rem;
-    width: 200px;
-    padding: 1.8rem 1rem;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
- 
-.member-card img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 0.8rem;
+
+.library h1 {
+    font-size: 2.5rem;
     margin-bottom: 1rem;
-}
- 
-.member-card p {
-    font-size: 1.1rem;
-    font-weight: 600;
+    color: #333333;
 }
 
-.member-card i {
+.library h1 p {
     font-size: 1.2rem;
-    color: #571B11;
-    margin: 0.3rem;
-    cursor: pointer;
-    transition: color 0.3s;
+    color: #666666;
+    margin-top: 0.5rem;
 }
 
-.member-card i:hover {
+.search-bar {
+    position: relative;
+    margin-top: 2rem;
+    text-align: center;
+    border-radius: 2rem;
+}
+
+.search-bar input[type="text"] {
+    width: 50%;
+    padding: 0.8rem 1.5rem;
+    border: 2px solid #ccc;
+    border-radius: 2rem;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-bar input[type="text"]:focus {
+    border-color: #571B11;
+    outline: none;
+}
+
+.search-bar button {
+    position: absolute;
+    bottom: 5%;
+    right: 22%;
+    transform: translateX(-100%);
+    border: none;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.3s;
+    background: none;
+    z-index: 1;
+}
+
+.search-bar button:hover {
     color: #ff6f61;
 }
 
-.member-card:hover {
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 3rem;
+    justify-content: center;
+}
+
+.book-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 480px;
+    width: 250px;
+    flex: 0 0 180px;
+    background: #FFFFFF;
+    border-radius: 1rem;
+    padding: 1.5rem 2.5rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.book-item:hover {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transform: translateY(-5px);
-    transition: all 0.3s ease;
+}
+
+.book-item img {
+    width: 150px !important;
+    height: 220px !important;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.book-item h3 {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #333333;
+}
+
+.book-item p {
+    font-size: 0.9rem;
+    color: #666666;
+    margin-bottom: 1rem;
+}
+
+.copies {
+    font-size: 0.9rem;
+    color: #999999;
+    margin-bottom: 1.5rem;
+}
+
+.copies span {
+    font-weight: 600;
+    color: #571B11;
+}
+
+.borrow-btn {
+    background-color: #571B11;
+    color: #FFFFFF;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-top: auto;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.borrow-btn:hover {
+    background-color: #ff6f61;
+}
+
+.library h2 {
+    margin-top: 4rem;
+    font-size: 2rem;
+    color: #333333;
+}
+
+.borrowed-list {
+    margin-top: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
 }
  
 /* FOOTER */
