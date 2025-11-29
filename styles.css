@@ -78,3 +78,37 @@ nav ul li a:hover::after,
 nav ul li a.active::after {
   width: 100%;
 }
+
+/* FOOTER */
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background: #F5F5F5;
+    margin-top: 2rem;
+}
+
+.soc-med-links {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.5rem;
+    color: #571B11;
+    margin-bottom: 1rem;
+}
+
+.soc-med-links i {
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.soc-med-links i:hover {
+    color: #ff6f61;
+}
+ 
+footer .copy {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}

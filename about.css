@@ -14,6 +14,8 @@ body {
 }
  
 nav {
+    position: sticky;
+    top: 0;
     width: 100%;
     padding: 0.7rem 4rem;
     display: flex;
@@ -74,7 +76,8 @@ nav ul li a::after {
   transition: 0.3s ease;
 }
  
-nav ul li a:hover::after {
+nav ul li a:hover::after,
+nav ul li a.active::after {
   width: 100%;
 }
  
@@ -127,6 +130,8 @@ nav ul li a:hover::after {
     width: 200px;
     padding: 1.8rem 1rem;
     text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
  
 .member-card img {
@@ -141,18 +146,50 @@ nav ul li a:hover::after {
     font-size: 1.1rem;
     font-weight: 600;
 }
+
+.member-card i {
+    font-size: 1.2rem;
+    color: #571B11;
+    margin: 0.3rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.member-card i:hover {
+    color: #ff6f61;
+}
+
+.member-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
  
 /* FOOTER */
 footer {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 2rem;
     background: #F5F5F5;
-    font-size: 0.9rem;
+    margin-top: 2rem;
 }
- 
-footer p {
-    margin: 0.3rem 0;
-    font-weight: 600;
+
+.soc-med-links {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.5rem;
+    color: #571B11;
+    margin-bottom: 1rem;
+}
+
+.soc-med-links i {
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.soc-med-links i:hover {
+    color: #ff6f61;
 }
  
 footer .copy {
