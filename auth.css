@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 * {
     margin: 0;
@@ -55,6 +56,11 @@ body {
     border-radius: 30px 0 0 30px;
 }
 
+.bi-door-open-fill, .bi-pen-fill {
+    font-size: 3rem;
+    color: #333;
+}
+
 form {
     width: 100%;
 }
@@ -62,6 +68,7 @@ form {
 .form-box.login h1, .form-box.signup h1 {
     color: #333;
     font-size: 1.5rem;
+    margin-top: 20px;
     margin-bottom: 40px;
     font-weight: 700;
 }
@@ -156,13 +163,25 @@ form {
 
 .welcome-page h1 {
     color: #fff;
-    font-size: 36px;
+    font-size: 30px;
     margin-bottom: 20px;
 }
 
 .welcome-page p {
     color: #fff;
     font-size: 18px;
+}
+
+.welcome-page span {
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.welcome-page img {
+    width: 100px;
+    margin-bottom: 20px;
 }
 
 .auth-link {

@@ -15,24 +15,26 @@
     <div id="login" class="container">
         <div class="login form-box" id="authLogin">
             <form action="">
+                <i class="bi bi-door-open-fill"></i>
                 <h1>Sign In to your Account</h1>
                 <div class="input-box">
-                    <input type="text" placeholder="Username" required>
+                    <input id="loginUsername" type="text" placeholder="Username" required>
                     <i class="bi bi-person-fill"></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" placeholder="Password" required>
+                    <input id="loginPassword" type="password" placeholder="Password" required>
                     <i class="bi bi-lock-fill"></i>
                 </div>
-                <button type="submit" class="btn">Login</button>
-                <p class="auth-link">Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a></p>
+                <button type="button" class="btn" onclick="loginUser()">Login</button>
+                <p class="auth-link">Don't have an account? <a href="#" onclick="showSignup(); return false;">Sign Up</a></p>
             </form>
         </div>
         <div class="login welcome-page">
-            <h1>Welcome to <span>Alexein</span></h1>
+            <img src="./assets/icon.png" alt="">
+            <h1>Welcome to <span>ALEXEIN</span></h1>
             <p>Your Digital Gateway to Knowledge</p>
             <p>Are you new here?</p>
-            <button class="btn signup" onclick="showSignup()">Sign Up</button>
+            <button type="button" class="btn signup" onclick="showSignup()">Sign Up</button>
         </div>
     </div>
     
@@ -40,24 +42,26 @@
     <div id="signup" class="container hidden">
         <div class="signup form-box" id="authSignup">
             <form action="">
+                <i class="bi bi-pen-fill"></i>
                 <h1>Register an Account</h1>
                 <div class="input-box">
-                    <input type="text" placeholder="Username" required>
+                    <input id="signupUsername" type="text" placeholder="Username" required>
                     <i class="bi bi-person-fill"></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" placeholder="Password" required>
+                    <input id="signupPassword" type="password" placeholder="Password" required>
                     <i class="bi bi-lock-fill"></i>
                 </div>
-                <button type="submit" class="btn signup">Sign Up</button>
-                <p class="auth-link">Existing User? <a href="#" onclick="showLogin()">Login</a></p>
+                <button type="button" class="btn signup" onclick="signupUser()">Sign Up</button>
+                <p class="auth-link">Existing User? <a href="#" onclick="showLogin(); return false;">Login</a></p>
             </form>
         </div>
         <div class="signup welcome-page">
-            <h1>Welcome to <span>Alexein</span></h1>
+            <img src="./assets/icon.png" alt="">
+            <h1>Welcome to <span>ALEXEIN</span></h1>
             <p>Your Digital Gateway to Knowledge</p>
             <p>Already have an Account?</p>
-            <button class="btn" onclick="showLogin()">Log In</button>
+            <button type="button" class="btn" onclick="showLogin()">Log In</button>
         </div>
     </div>
     <script src="app.js"></script>

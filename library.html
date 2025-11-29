@@ -19,7 +19,7 @@
             <li><a href="index.html">HOME</a></li>
             <li><a href="about.html">ABOUT</a></li>
             <li><a href="library.html" class="active">LIBRARY</a></li>
-            <li><a href="#"><i class="bi bi-box-arrow-left"></i></a></li>
+            <li><a href="#" onclick="logout()"><i class="bi bi-box-arrow-left"></i></a></li>
         </ul>
     </nav>
     <main>
@@ -27,7 +27,7 @@
             <h1>Library</h1>
             <p>Welcome to the Alexein Library! Here you can browse and borrow from our extensive collection of books.</p>
             <div class="search-bar">
-                <input type="text" placeholder="Search for books" />
+                <input id="searchInput" type="text" placeholder="Search for books" oninput="searchBooks()"/>
                 <button><i class="bi bi-search"></i></button>
             </div>
             <div class="book-list">

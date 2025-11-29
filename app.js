@@ -9,53 +9,63 @@ function load(key, fallback) {
     return JSON.parse(localStorage.getItem(key)) || fallback;
 }
 
-// Clear Local Storage (for testing purposes)
-// localStorage.clear();
+// localStorage.clear(); // TEMP — uncomment for testing only
 
 /* ————————————————
-   DATA (LOAD FROM LOCAL STORAGE)
+   LOAD USERS & BOOKS
 ——————————————— */
 let books = load("books", [
-    {
-        title: "The Subtle Art of Not Giving a F*ck",
-        author: "Mark Manson",
-        genre: "Self-Help",
-        copies: 5,
-        img: "./assets/books/1.jpg"
+    { 
+        title: "The Subtle Art of Not Giving a F*ck", 
+        author: "Mark Manson", 
+        genre: "Self-Help", 
+        copies: 5, 
+        img: "./assets/books/1.jpg" 
     },
-    {
-        title: "The 48 Laws of Power",
-        author: "Robert Greene",
-        genre: "Self-Help",
-        copies: 5,
-        img: "./assets/books/2.png"
+    { 
+        title: "The 48 Laws of Power", 
+        author: "Robert Greene", 
+        genre: "Self-Help", 
+        copies: 5, 
+        img: "./assets/books/2.png" 
     },
-    {
-        title: "The Fault in Our Stars",
-        author: "John Green",
-        genre: "Romance",
-        copies: 5,
-        img: "./assets/books/3.jpg"
+    { 
+        title: "The Fault in Our Stars", 
+        author: "John Green", 
+        genre: "Romance", 
+        copies: 5, 
+        img: "./assets/books/3.jpg" 
     },
-    {
-        title: "Atomic Habits",
-        author: "James Clear",
-        genre: "Self-Help",
-        copies: 5,
-        img: "./assets/books/4.png"
+    { 
+        title: "Atomic Habits", 
+        author: "James Clear", 
+        genre: "Self-Help", 
+        copies: 5, 
+        img: "./assets/books/4.png" 
     },
-    {
-        title: "The Alchemist",
-        author: "Paulo Coelho",
-        genre: "Fantasy",
-        copies: 5,
-        img: "./assets/books/5.jpg"
+    { 
+        title: "The Alchemist", 
+        author: "Paulo Coelho", 
+        genre: "Fantasy", 
+        copies: 5, 
+        img: "./assets/books/5.jpg" 
     }
 ]);
 
-// Borrowed books structure:
-// { title, img, author, genre, borrowedCopies }
-let borrowRecords = load("borrowRecords", []);
+let users = load("users", [
+    { username: "Librarian", password: "CICS", type: "librarian" }
+]);
+
+let loggedUser = load("loggedUser", null);
+
+/* ————————————————
+   USER-SPECIFIC BORROW RECORDS
+——————————————— */
+function getBorrowKey() {
+    return loggedUser ? `borrowRecords_${loggedUser.username}` : "borrowRecords_guest";
+}
+
+let borrowRecords = load(getBorrowKey(), []);
 
 /* ————————————————
    DOM ELEMENTS
@@ -63,10 +73,76 @@ let borrowRecords = load("borrowRecords", []);
 const bookList = document.querySelector(".book-list");
 const borrowedList = document.querySelector(".borrowed-list");
 
+const login = document.getElementById("login");
+const signup = document.getElementById("signup");
+
 /* ————————————————
-   DISPLAY ALL BOOKS
+   AUTHENTICATION LOGIC
+——————————————— */
+function showSignup() {
+    login.classList.add("hidden");
+    signup.classList.remove("hidden");
+}
+
+function showLogin() {
+    signup.classList.add("hidden");
+    login.classList.remove("hidden");
+}
+
+function signupUser() {
+    let username = document.getElementById("signupUsername").value.trim();
+    let password = document.getElementById("signupPassword").value.trim();
+
+    if (!username || !password) {
+        alert("Please fill out all fields.");
+        return;
+    }
+
+    if (users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
+        alert("Username already taken!");
+        return;
+    }
+
+    users.push({ username, password, type: "user" });
+    save("users", users);
+
+    alert("Account created! You may now log in.");
+    showLogin();
+}
+
+function loginUser() {
+    let username = document.getElementById("loginUsername").value.trim();
+    let password = document.getElementById("loginPassword").value.trim();
+
+    let user = users.find(u => u.username === username && u.password === password);
+
+    if (!user) {
+        alert("Incorrect username or password!");
+        return;
+    }
+
+    save("loggedUser", user);
+    loggedUser = user;
+    borrowRecords = load(getBorrowKey(), []);
+
+    if (user.type === "librarian") {
+        window.location.href = "admin.html";
+    } else {
+        window.location.href = "index.html";
+    }
+}
+
+function logout() {
+    localStorage.removeItem("loggedUser");
+    window.location.href = "auth.html";
+}
+
+/* ————————————————
+   RENDER BOOKS
 ——————————————— */
 function renderBooks() {
+    if (!bookList) return;
+
     bookList.innerHTML = "";
 
     books.forEach(book => {
@@ -87,7 +163,49 @@ function renderBooks() {
 }
 
 /* ————————————————
-   BORROW A BOOK
+   SEARCH BOOKS
+——————————————— */
+
+function searchBooks() {
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    
+    const filteredBooks = books.filter(book =>
+        book.title.toLowerCase().includes(query)
+    );
+
+    renderFilteredBooks(filteredBooks);
+}
+
+function renderFilteredBooks(filtered) {
+    if (!bookList) return;
+
+    bookList.innerHTML = "";
+
+    if (filtered.length === 0) {
+        bookList.innerHTML = `<p>No books found.</p>`;
+        return;
+    }
+
+    filtered.forEach(book => {
+        const item = document.createElement("div");
+        item.classList.add("book-item");
+
+        item.innerHTML = `
+            <img src="${book.img}">
+            <h3>${book.title}</h3>
+            <p>${book.author}</p>
+            <p>${book.genre}</p>
+            <p class="copies">Copies Available: <span>${book.copies}</span></p>
+            <button class="borrow-btn" onclick="borrowBook('${book.title}')">Borrow</button>
+        `;
+
+        bookList.appendChild(item);
+    });
+}
+
+
+/* ————————————————
+   BORROW BOOK (PER USER)
 ——————————————— */
 function borrowBook(title) {
     let book = books.find(b => b.title === title);
@@ -96,18 +214,14 @@ function borrowBook(title) {
         return;
     }
 
-    // Deduct 1 copy from main inventory
     book.copies--;
     save("books", books);
 
-    // Check if already borrowed
     let record = borrowRecords.find(r => r.title === title);
 
     if (record) {
-        // Increase borrowed count
         record.borrowedCopies++;
     } else {
-        // New borrowed card
         borrowRecords.push({
             title: book.title,
             img: book.img,
@@ -117,42 +231,43 @@ function borrowBook(title) {
         });
     }
 
-    save("borrowRecords", borrowRecords);
+    save(getBorrowKey(), borrowRecords);
 
     renderBooks();
     renderBorrowed();
 }
 
 /* ————————————————
-   RETURN A BOOK
+   RETURN BOOK
 ——————————————— */
 function returnBook(title) {
     let record = borrowRecords.find(r => r.title === title);
     if (!record) return;
 
-    // Decrease borrowed quantity
     record.borrowedCopies--;
 
-    // Return one copy back to inventory
     let book = books.find(b => b.title === title);
     if (book) book.copies++;
 
-    // Remove borrowed card if fully returned
     if (record.borrowedCopies <= 0) {
         borrowRecords = borrowRecords.filter(r => r.title !== title);
     }
 
-    save("borrowRecords", borrowRecords);
     save("books", books);
+    save(getBorrowKey(), borrowRecords);
 
     renderBooks();
     renderBorrowed();
 }
 
 /* ————————————————
-   DISPLAY BORROWED BOOKS
+   RENDER BORROWED (FOR THIS USER ONLY)
 ——————————————— */
 function renderBorrowed() {
+    if (!borrowedList) return;
+
+    borrowRecords = load(getBorrowKey(), []);
+
     borrowedList.innerHTML = "";
 
     if (borrowRecords.length === 0) {
@@ -178,9 +293,17 @@ function renderBorrowed() {
 }
 
 /* ————————————————
-   INIT
+   PAGE PROTECTION + INIT
 ——————————————— */
 document.addEventListener("DOMContentLoaded", () => {
+    let current = window.location.pathname.split("/").pop();
+    let protectedPages = ["index.html", "library.html", "about.html", "admin.html"];
+
+    if (protectedPages.includes(current) && !loggedUser) {
+        window.location.href = "auth.html";
+        return;
+    }
+
     renderBooks();
     renderBorrowed();
 });
