@@ -9,10 +9,17 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background: linear-gradient(90deg, #F0E5D8 , #F5F5DC)
 }
 
+main{
+    flex-grow: 1;
+}
+
+/* --- Navigation Bar --- */
 nav {
     width: 100%;
     padding: 0.7rem 4rem;
@@ -41,7 +48,14 @@ nav {
 
 .nav-logo img {
     height: 3rem;
-    margin-right: auto;
+    /* margin-right: auto; // Removed this since we want the h2 next to it */
+}
+
+/* New class from Librarian.html */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 nav ul {
@@ -76,4 +90,195 @@ nav ul li a::after {
 
 nav ul li a:hover::after {
   width: 100%;
+}
+
+/* Home Page */
+.home-banner {
+    background-color: white; /* Matches the nav background */
+    color: #571B11;
+    text-align: center;
+    padding: 100px 0 50px; /* Adjust padding as needed */
+}
+
+.main-title {
+    font-size: 5rem; /* Larger font size for ALEXEIN */
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}
+
+.sub-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+/* --- Featured Books Section --- */
+.featured-books {
+    background-color: #571B11; /* Darker background for this section */
+    color: #FFFFFF;
+    padding: 50px 4rem 125px; /* Top/bottom padding */
+    text-align: center;
+}
+
+.featured-title {
+    font-size: 5.5rem;    
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.book-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Space between book cards */
+}
+
+.book-card {
+    width: 150px;
+    height: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align content to the bottom */
+    text-align: left;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.Outer-card
+{
+    width: 190px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#title 
+{
+    flex-shrink:2px ;
+    
+}
+
+.book-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 5px;
+}
+
+.book-author {
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: white; /* Matches the nav and banner background */
+    color: #571B11;
+    padding: 20px 4rem;
+    text-align: start;
+}
+
+.footer-links {
+    margin-bottom: 10px;
+}
+
+.footer-links p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    font-weight: 300;
+    margin: 0;
+}
+
+/* --- Librarian Dashboard Styles (from Librarian.html) --- */
+
+.dashboard-container {
+    padding: 2rem;
+    flex-grow: 1; /* Allows main to push content down */
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.dashboard-title {
+    color: #571B11;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.container-box {
+    background: #FFFFFF;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.container-box h2 {
+    color: #7B3F37;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #571B11;
+    padding-bottom: 5px;
+}
+
+.dashboard-table {
+    font-size: 0.9rem;
+    border-radius: 10px;
+    overflow: hidden; /* For rounded corners on the table */
+}
+
+.dashboard-table thead {
+    background-color: #571B11;
+    color: #FFFFFF;
+}
+
+.dashboard-table th {
+    font-weight: 600;
+}
+
+.dashboard-table tbody tr:hover {
+    background-color: #F0E5D8 !important; /* Highlight row on hover */
+}
+
+.dash-btn {
+    background-color: #7B3F37;
+    border-color: #7B3F37;
+    transition: background-color 0.3s;
+}
+
+.dash-btn:hover {
+    background-color: #571B11;
+    border-color: #571B11;
+}
+
+.row 
+{
+    background: #FFFFFF;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+/* Utility to ensure responsiveness */
+.table-responsive {
+    max-height: 400px; /* Limits the height of tables */
+    overflow-y: auto;
 }
