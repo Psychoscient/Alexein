@@ -9,7 +9,7 @@ function load(key, fallback) {
     return JSON.parse(localStorage.getItem(key)) || fallback;
 }
 
-// localStorage.clear(); // TEMP — uncomment for testing only
+// localStorage.clear();
 
 /* ————————————————
    LOAD USERS & BOOKS
@@ -145,21 +145,36 @@ function renderBooks() {
 
     bookList.innerHTML = "";
 
-    books.forEach(book => {
-        const item = document.createElement("div");
-        item.classList.add("book-item");
+    if (window.location.href.includes("index.html")) {
+        for (let i = 0; i < 3; i++) {
+            const book = books[i];
+            const item = document.createElement("div");
+            item.classList.add("book-item");
+            item.innerHTML = `
+                <img src="${book.img}">
+                <h3>${book.title}</h3>
+                <p>${book.author}</p>
+                <p>${book.genre}</p>
+            `;
+            bookList.appendChild(item);
+        }
+    } else {
+        books.forEach(book => {
+            const item = document.createElement("div");
+            item.classList.add("book-item");
 
-        item.innerHTML = `
-            <img src="${book.img}">
-            <h3>${book.title}</h3>
-            <p>${book.author}</p>
-            <p>${book.genre}</p>
-            <p class="copies">Copies Available: <span>${book.copies}</span></p>
-            <button class="borrow-btn" onclick="borrowBook('${book.title}')">Borrow</button>
-        `;
+            item.innerHTML = `
+                <img src="${book.img}">
+                <h3>${book.title}</h3>
+                <p>${book.author}</p>
+                <p>${book.genre}</p>
+                <p class="copies">Copies Available: <span>${book.copies}</span></p>
+                <button class="borrow-btn" onclick="borrowBook('${book.title}')">Borrow</button>
+            `;
 
-        bookList.appendChild(item);
-    });
+            bookList.appendChild(item);
+        });
+    }
 }
 
 /* ————————————————
@@ -293,11 +308,127 @@ function renderBorrowed() {
 }
 
 /* ————————————————
+   ADMIN / LIBRARIAN FUNCTIONS
+——————————————— */
+
+// Render users in the librarian dashboard
+function renderUsers() {
+    const usersTable = document.getElementById("usersTableBody");
+    if (!usersTable) return; // Only run on admin.html
+
+    usersTable.innerHTML = "";
+
+    users.forEach(u => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${u.username}</td>
+            <td>${u.password}</td>
+            <td>${u.type}</td>
+        `;
+        usersTable.appendChild(row);
+    });
+}
+
+// Render books for the Inventory table
+function renderBooksTable() {
+    const table = document.getElementById("booksTableBody");
+    if (!table) return; // Only run on admin.html
+
+    table.innerHTML = "";
+
+    books.forEach((b, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${b.title}</td>
+            <td>${b.author}</td>
+            <td>${b.genre}</td>
+            <td>${b.copies}</td>
+            <td><img src="${b.img}" alt="${b.title}" width="50"></td>
+            <td>
+                <button class="btn btn-primary btn-sm" onclick="editBook(${index})">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteBook(${index})">Delete</button>
+            </td>
+        `;
+        table.appendChild(row);
+    });
+}
+
+// Add a new book
+function addBook() {
+    let title = document.getElementById("newBookTitle").value.trim();
+    let author = document.getElementById("newBookAuthor").value.trim();
+    let genre = document.getElementById("newBookGenre").value.trim();
+    let copies = parseInt(document.getElementById("newBookCopies").value);
+    let img = document.getElementById("newBookImg").value.trim();
+
+    let msg = document.getElementById("addBookMessage");
+
+    if (!title || !author || !genre || !copies || !img) {
+        msg.textContent = "Please fill out all fields.";
+        msg.style.color = "red";
+        return;
+    }
+
+    books.push({ title, author, genre, copies, img });
+    save("books", books);
+
+    msg.textContent = "Book added successfully!";
+    msg.style.color = "green";
+
+    renderBooksTable();
+}
+
+function editBook(i) {
+    let book = books[i];
+    let newTitle = prompt("Edit Title:", book.title);
+    let newAuthor = prompt("Edit Author:", book.author);
+    let newGenre = prompt("Edit Genre:", book.genre);
+    let newCopies = NaN;
+
+    do {
+        newCopies = prompt("Edit Copies:", book.copies);
+        if (newCopies !== null) newCopies = parseInt(newCopies);
+        if (isNaN(newCopies)) {
+            alert("Please enter a valid number for copies.");
+        } else {
+            book.copies = newCopies;
+        }
+    } while (isNaN(newCopies) && newCopies !== null);
+
+    let newImg = prompt("Edit Image URL:", book.img);
+    
+    if (newTitle) book.title = newTitle;
+    if (newAuthor) book.author = newAuthor;
+    if (newGenre) book.genre = newGenre;
+    if (newImg) book.img = newImg;
+
+    save("books", books);
+    renderBooksTable();
+}
+
+// Delete a book
+function deleteBook(i) {
+    books.splice(i, 1);
+    save("books", books);
+    renderBooksTable();
+}
+
+/* ————————————————
    PAGE PROTECTION + INIT
 ——————————————— */
 document.addEventListener("DOMContentLoaded", () => {
     let current = window.location.pathname.split("/").pop();
     let protectedPages = ["index.html", "library.html", "about.html", "admin.html"];
+
+    if (current === "admin.html") {
+        if (!loggedUser || loggedUser.type !== "librarian") {
+            window.location.href = "auth.html";
+            return;
+        }
+
+        renderBooksTable();
+        renderUsers();
+    }
 
     if (protectedPages.includes(current) && !loggedUser) {
         window.location.href = "auth.html";

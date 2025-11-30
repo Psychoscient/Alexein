@@ -82,6 +82,93 @@ nav ul li a.active::after {
   width: 100%;
 }
 
+/* HOME */
+.home-banner {
+    background-color: white; /* Matches the nav background */
+    color: #571B11;
+    text-align: center;
+    padding: 100px 0 50px; /* Adjust padding as needed */
+}
+
+.main-title {
+    font-size: 5rem; /* Larger font size for ALEXEIN */
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}
+
+.sub-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+.featured-books {
+    padding: 2rem 4rem;
+}
+
+.featured-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #571B11;
+}
+
+.book-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 1rem;
+}
+
+.book-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 480px;
+    width: 250px;
+    flex: 0 0 180px;
+    background: #FFFFFF;
+    border-radius: 1rem;
+    padding: 1.5rem 2.5rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.book-item:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.book-item img {
+    width: 150px !important;
+    height: 220px !important;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.book-item h3 {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #333333;
+}
+
+.book-item p {
+    font-size: 0.9rem;
+    color: #666666;
+    margin-bottom: 1rem;
+}
+
 /* FOOTER */
 footer {
     display: flex;
@@ -114,4 +201,52 @@ footer .copy {
     margin-top: 1rem;
     font-size: 0.8rem;
     font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .nav-logo {
+        display: none;
+    }
+
+    nav {
+        padding: 0.7rem 1.2rem;
+    }
+
+    nav ul {
+        gap: 1.2rem;
+        margin: 10px;
+    }
+
+    .main-title {
+        font-size: 3rem;
+    }
+
+    .sub-title {
+        font-size: 1.8rem;
+    }
+
+    .featured-books {
+        padding: 1rem 1rem;
+    }
+}
+
+/* Book list responsiveness */
+@media (max-width: 992px) {
+    .book-item {
+        width: 210px;
+        height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .book-item {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .book-item img {
+        width: 100%;
+        height: auto;
+    }
 }

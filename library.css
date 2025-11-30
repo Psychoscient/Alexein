@@ -261,3 +261,31 @@ footer .copy {
     font-size: 0.8rem;
     font-weight: 500;
 }
+
+@media (max-width: 768px) {
+
+    .nav-logo {
+        display: none;
+    }
+
+    nav {
+        padding: 0.7rem 1.2rem;
+    }
+
+    nav ul {
+        gap: 1.2rem;
+        margin: 10px;
+    }
+
+    .library {
+        padding: 1rem 1rem;
+    }
+
+    .search-bar input[type="text"] {
+        width: 80%;
+    }
+
+    .search-bar button {
+        right: 1%;
+    }
+}

@@ -199,3 +199,39 @@ footer .copy {
     font-size: 0.8rem;
     font-weight: 500;
 }
+
+@media (max-width: 768px) {
+
+    .nav-logo {
+        display: none;
+    }
+
+    nav {
+        padding: 0.7rem 1.2rem;
+    }
+
+    nav ul {
+        gap: 1.2rem;
+        margin: 10px;
+    }
+    
+    .about-section h1 {
+        font-size: 2.3rem;
+    }
+
+    .about-section p {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .members-section h1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .member-card {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
