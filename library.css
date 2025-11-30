@@ -262,6 +262,8 @@ footer .copy {
     font-weight: 500;
 }
 
+/* Media Queries */
+
 @media (max-width: 768px) {
 
     .nav-logo {

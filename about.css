@@ -200,6 +200,8 @@ footer .copy {
     font-weight: 500;
 }
 
+/* Media Queries */
+
 @media (max-width: 768px) {
 
     .nav-logo {
@@ -214,7 +216,7 @@ footer .copy {
         gap: 1.2rem;
         margin: 10px;
     }
-    
+
     .about-section h1 {
         font-size: 2.3rem;
     }

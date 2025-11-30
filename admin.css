@@ -19,7 +19,6 @@ main{
     flex-grow: 1;
 }
 
-/* --- Navigation Bar --- */
 nav {
     width: 100%;
     padding: 0.7rem 4rem;
@@ -48,10 +47,8 @@ nav {
 
 .nav-logo img {
     height: 3rem;
-    /* margin-right: auto; // Removed this since we want the h2 next to it */
 }
 
-/* New class from Librarian.html */
 .nav-links {
     display: flex;
     align-items: center;
@@ -92,16 +89,15 @@ nav ul li a:hover::after {
   width: 100%;
 }
 
-/* Home Page */
 .home-banner {
-    background-color: white; /* Matches the nav background */
+    background-color: white;
     color: #571B11;
     text-align: center;
-    padding: 100px 0 50px; /* Adjust padding as needed */
+    padding: 100px 0 50px;
 }
 
 .main-title {
-    font-size: 5rem; /* Larger font size for ALEXEIN */
+    font-size: 5rem;
     font-weight: 900;
     margin-bottom: 0.5rem;
 }
@@ -118,11 +114,10 @@ nav ul li a:hover::after {
     margin-bottom: 0;
 }
 
-/* --- Featured Books Section --- */
 .featured-books {
-    background-color: #571B11; /* Darker background for this section */
+    background-color: #571B11; 
     color: #FFFFFF;
-    padding: 50px 4rem 125px; /* Top/bottom padding */
+    padding: 50px 4rem 125px; 
     text-align: center;
 }
 
@@ -135,7 +130,7 @@ nav ul li a:hover::after {
 .book-list {
     display: flex;
     justify-content: center;
-    gap: 30px; /* Space between book cards */
+    gap: 30px;
 }
 
 .book-card {
@@ -144,7 +139,7 @@ nav ul li a:hover::after {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Align content to the bottom */
+    justify-content: flex-end;
     text-align: left;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -180,9 +175,8 @@ nav ul li a:hover::after {
     font-weight: 400;
 }
 
-/* --- Footer --- */
 footer {
-    background-color: white; /* Matches the nav and banner background */
+    background-color: white;
     color: #571B11;
     padding: 20px 4rem;
     text-align: start;
@@ -203,11 +197,9 @@ footer {
     margin: 0;
 }
 
-/* --- Librarian Dashboard Styles (from Librarian.html) --- */
-
 .dashboard-container {
     padding: 2rem;
-    flex-grow: 1; /* Allows main to push content down */
+    flex-grow: 1; 
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
@@ -241,7 +233,7 @@ footer {
 .dashboard-table {
     font-size: 0.9rem;
     border-radius: 10px;
-    overflow: hidden; /* For rounded corners on the table */
+    overflow: hidden;
 }
 
 .dashboard-table thead {
@@ -254,7 +246,7 @@ footer {
 }
 
 .dashboard-table tbody tr:hover {
-    background-color: #F0E5D8 !important; /* Highlight row on hover */
+    background-color: #F0E5D8 !important; 
 }
 
 .dash-btn {
@@ -276,9 +268,8 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #e0e0e0;
 }
-
-/* Utility to ensure responsiveness */
+    
 .table-responsive {
-    max-height: 400px; /* Limits the height of tables */
+    max-height: 400px; 
     overflow-y: auto;
 }

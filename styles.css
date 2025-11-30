@@ -84,14 +84,14 @@ nav ul li a.active::after {
 
 /* HOME */
 .home-banner {
-    background-color: white; /* Matches the nav background */
+    background-color: white;
     color: #571B11;
     text-align: center;
-    padding: 100px 0 50px; /* Adjust padding as needed */
+    padding: 100px 0 50px;
 }
 
 .main-title {
-    font-size: 5rem; /* Larger font size for ALEXEIN */
+    font-size: 5rem;
     font-weight: 900;
     margin-bottom: 0.5rem;
 }
@@ -230,7 +230,6 @@ footer .copy {
     }
 }
 
-/* Book list responsiveness */
 @media (max-width: 992px) {
     .book-item {
         width: 210px;

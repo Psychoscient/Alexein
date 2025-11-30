@@ -199,9 +199,7 @@ form {
     display: none;
 }
 
-/* Mobile Responsive for Auth Page */
 @media (max-width: 768px) {
-    /* Hide welcome page on mobile */
 
     .mobile-welcome {
         display: block;
@@ -229,7 +227,6 @@ form {
         padding: 20px;
     }
     
-    /* Center the form box and make it full width */
     .form-box {
         position: relative !important;
         width: 100% !important;
@@ -238,7 +235,6 @@ form {
         padding: 30px 20px;
     }
     
-    /* Adjust form spacing for mobile */
     .form-box h1 {
         font-size: 1.3rem;
         margin-bottom: 30px;
@@ -254,7 +250,7 @@ form {
 }
 
 @media (max-width: 576px) {
-    /* Extra small screens */
+
     .container {
         margin: 10px;
         padding: 15px;

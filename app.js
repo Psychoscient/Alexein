@@ -1,6 +1,7 @@
 /* ————————————————
    STORAGE HELPERS
 ——————————————— */
+
 function save(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }
@@ -14,6 +15,7 @@ function load(key, fallback) {
 /* ————————————————
    LOAD USERS & BOOKS
 ——————————————— */
+
 let books = load("books", [
     { 
         title: "The Subtle Art of Not Giving a F*ck", 
@@ -61,6 +63,7 @@ let loggedUser = load("loggedUser", null);
 /* ————————————————
    USER-SPECIFIC BORROW RECORDS
 ——————————————— */
+
 function getBorrowKey() {
     return loggedUser ? `borrowRecords_${loggedUser.username}` : "borrowRecords_guest";
 }
@@ -70,6 +73,7 @@ let borrowRecords = load(getBorrowKey(), []);
 /* ————————————————
    DOM ELEMENTS
 ——————————————— */
+
 const bookList = document.querySelector(".book-list");
 const borrowedList = document.querySelector(".borrowed-list");
 
@@ -79,6 +83,7 @@ const signup = document.getElementById("signup");
 /* ————————————————
    AUTHENTICATION LOGIC
 ——————————————— */
+
 function showSignup() {
     login.classList.add("hidden");
     signup.classList.remove("hidden");
@@ -140,6 +145,7 @@ function logout() {
 /* ————————————————
    RENDER BOOKS
 ——————————————— */
+
 function renderBooks() {
     if (!bookList) return;
 
@@ -218,10 +224,10 @@ function renderFilteredBooks(filtered) {
     });
 }
 
-
 /* ————————————————
    BORROW BOOK (PER USER)
 ——————————————— */
+
 function borrowBook(title) {
     let book = books.find(b => b.title === title);
     if (!book || book.copies < 1) {
@@ -255,6 +261,7 @@ function borrowBook(title) {
 /* ————————————————
    RETURN BOOK
 ——————————————— */
+
 function returnBook(title) {
     let record = borrowRecords.find(r => r.title === title);
     if (!record) return;
@@ -276,8 +283,9 @@ function returnBook(title) {
 }
 
 /* ————————————————
-   RENDER BORROWED (FOR THIS USER ONLY)
+   RENDER BORROWED
 ——————————————— */
+
 function renderBorrowed() {
     if (!borrowedList) return;
 
@@ -311,10 +319,9 @@ function renderBorrowed() {
    ADMIN / LIBRARIAN FUNCTIONS
 ——————————————— */
 
-// Render users in the librarian dashboard
 function renderUsers() {
     const usersTable = document.getElementById("usersTableBody");
-    if (!usersTable) return; // Only run on admin.html
+    if (!usersTable) return;
 
     usersTable.innerHTML = "";
 
@@ -329,10 +336,9 @@ function renderUsers() {
     });
 }
 
-// Render books for the Inventory table
 function renderBooksTable() {
     const table = document.getElementById("booksTableBody");
-    if (!table) return; // Only run on admin.html
+    if (!table) return; 
 
     table.innerHTML = "";
 
@@ -353,7 +359,6 @@ function renderBooksTable() {
     });
 }
 
-// Add a new book
 function addBook() {
     let title = document.getElementById("newBookTitle").value.trim();
     let author = document.getElementById("newBookAuthor").value.trim();
@@ -406,7 +411,6 @@ function editBook(i) {
     renderBooksTable();
 }
 
-// Delete a book
 function deleteBook(i) {
     books.splice(i, 1);
     save("books", books);
@@ -416,6 +420,7 @@ function deleteBook(i) {
 /* ————————————————
    PAGE PROTECTION + INIT
 ——————————————— */
+
 document.addEventListener("DOMContentLoaded", () => {
     let current = window.location.pathname.split("/").pop();
     let protectedPages = ["index.html", "library.html", "about.html", "admin.html"];
